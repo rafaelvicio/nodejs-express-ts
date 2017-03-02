@@ -1,0 +1,14 @@
+import * as express from 'express';
+import UserController from './controllers/UserController';
+
+export default (app: express.Application, controllers: {user: UserController}) => {
+  app.post('/api/user', controllers.user.list);
+  // app.get('/api/profiles/:username', controllers.account.getAccount);
+  // app.put('/api/profiles/:username', controllers.account.updateAccount);
+  // app.del('/api/profiles/:username', controllers.account.deleteAccount);
+  // app.post('/api/lists', controllers.list.createShoppingList);
+  // app.post('/api/lists/:id', controllers.list.createShoppingList);
+  // app.put('/api/lists/:id', controllers.list.updateShoppingList);
+  // app.get('/api/lists/:userId', controllers.list.getShoppingLists);
+  // app.del('/api/lists/:id', controllers.list.deleteShoppingList);
+}

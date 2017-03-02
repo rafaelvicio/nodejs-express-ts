@@ -1,0 +1,54 @@
+{
+  "name": "nodejs-express-ts",
+  "version": "0.1.0",
+  "description": "Base NodeJS + Express + TypeScript application",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagolpadua/nodejs-express-ts.git"
+  },
+  "author": "Tiago Lage Payne de Pádua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagolpadua/nodejs-express-ts/issues"
+  },
+  "homepage": "https://github.com/tiagolpadua/nodejs-express-ts#readme",
+  "devDependencies": {
+    "@types/body-parser": "^0.0.33",
+    "@types/cookie-parser": "^1.3.30",
+    "@types/errorhandler": "^0.0.30",
+    "@types/morgan": "^1.7.32",
+    "@types/node-uuid": "0.0.28",
+    "@types/sequelize": "^4.0.42",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express-server": "^0.5.3",
+    "grunt-karma": "^2.0.0",
+    "grunt-timer": "^0.6.0",
+    "grunt-ts": "^6.0.0-beta.10",
+    "grunt-tslint": "^4.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.0.2",
+    "tslint": "^4.4.2",
+    "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.2.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.13.4",
+    "moment": "^2.17.1",
+    "morgan": "^1.7.0",
+    "node-uuid": "^1.4.7",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.24.3",
+    "serve-favicon": "^2.3.0"
+  }
+}
