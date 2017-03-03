@@ -1,80 +1,65 @@
-import Server from './Server';
-import http = require('http');
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+import * as express from 'express';
+import * as logger from 'morgan';
+import * as path from 'path';
+import * as http from 'http';
 
-/**
- * Get port from environment and store in Express.
- */
-const port = normalizePort(process.env.PORT || '3000');
+// import errorHandler = require('errorhandler');
+import * as errorHandler from 'errorhandler';
+// import { IndexRoute } from './routes/index';
+import UserRoute from './routes/User';
+import { SequelizeStorageManager } from './StorageManager'
 
-const app = Server.bootstrap().app;
+const app: express.Application = express();
 
-app.set('port', port);
+const storageManager: SequelizeStorageManager = new SequelizeStorageManager(
+  {
+    database: process.env.DB_NAME || 'node-express-ts',
+    username: process.env.DB_USER_NAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+  });
 
-/**
- * Create HTTP server.
- */
-const httpServer = http.createServer(app);
+// storageManager.init(true);
+storageManager.init(false);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-httpServer.listen(port);
-httpServer.on('error', onError);
-httpServer.on('listening', onListening);
+config();
+routes();
 
-/**
- * Normalize a port into a number, string, or false.
- */
-function normalizePort(val: any): any {
-  const port = parseInt(val, 10);
+function config() {
+  // add static paths
+  app.use(express.static(path.join(__dirname, 'public')));
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+  // configure pug
+  // app.set('views', path.join(__dirname, 'views'));
+  // app.set('view engine', 'pug');
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+  // mount logger
+  app.use(logger('dev'));
 
-  return false;
+  // mount json form parser
+  app.use(bodyParser.json());
+
+  // mount cookie parker
+  app.use(cookieParser('SECRET_GOES_HERE'));
+
+  // catch 404 and forward to error handler
+  app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+    err.status = 404;
+    next(err);
+  });
+
+  // error handling
+  app.use(errorHandler());
 }
 
-/**
- * Event listener for HTTP server 'error' event.
- */
-function onError(error: any): void {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+function routes() {
+  const router: express.Router = express.Router();
 
-  const bind = typeof port === 'string' ?
-    'Pipe ' + port
-    : 'Port ' + port;
+  const userRoute: UserRoute = new UserRoute(storageManager);
+  userRoute.configure(router);
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+  app.use(router);
 }
 
-/**
- * Event listener for HTTP server 'listening' event.
- */
-function onListening(): void {
-  const addr = httpServer.address();
-  const bind = typeof addr === 'string' ?
-    'pipe ' + addr
-    : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
-}
+export = app;

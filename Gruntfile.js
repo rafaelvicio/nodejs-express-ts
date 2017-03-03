@@ -29,7 +29,7 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: 'dist/app.js'
+          script: 'dist/index.js'
         }
       },
       prod: {
@@ -42,11 +42,6 @@ module.exports = function (grunt) {
         options: {
           script: 'path/to/test/server.js'
         }
-      }
-    },
-    karma: {
-      unit: {
-        configFile: 'karma.conf.js'
       }
     },
     ts: {
@@ -80,7 +75,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
-  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-tslint');
 
@@ -88,7 +82,6 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'build',
     'Clean, lint, compile, copy and test all assets.',
-    // ['clean', 'tslint', 'ts', 'copy', 'karma']
     ['clean', 'tslint', 'ts', 'copy']
   );
 

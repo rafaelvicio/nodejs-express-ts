@@ -7,6 +7,7 @@ This is a base "real" API project with a complete setup of:
 * TypeScript
 * TSLint
 * Database access (Postgres)
+* Sequelize (ORM)
 * Authentication
 * Tests
 
@@ -101,3 +102,7 @@ Raise error on expressions and declarations with an implied any type.
 File: tslint.json
 https://palantir.github.io/tslint/usage/tslint-json/
 Set of rules used by tslint to lint your TypeScript code.
+
+Sequelize
+http://ngerakines.me/2016/04/11/sequelize/
+https://github.com/suksant/sequelize-typescript-examples
