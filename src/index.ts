@@ -75,6 +75,8 @@ function onListening(): void {
     'pipe ' + addr
     : 'port ' + addr.port;
   console.log('Listening on ' + bind);
+  console.log('-----------------------');
+  console.log(JSON.stringify(process.env));
 }
 
 // for testing

@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     clean: {
       all: {
-        src: [buildDir]
+        src: [buildDir, './**/*.tmp.txt']
       },
     },
     copy: {
@@ -29,18 +29,29 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: 'dist/index.js'
+          script: 'dist/index.js',
+          node_env: 'development',
+          db_name: 'node-express-ts-dev',
+          db_user: 'postgres',
+          db_password: 'postgres'
         }
       },
       prod: {
         options: {
-          script: 'path/to/prod/server.js',
-          node_env: 'production'
+          script: 'dist/index.js',
+          node_env: 'production',
+          db_name: 'node-express-ts-prod',
+          db_user: 'postgres',
+          db_password: 'postgres'
         }
       },
       test: {
         options: {
-          script: 'path/to/test/server.js'
+          script: 'dist/index.js',
+          node_env: 'test',
+          db_name: 'node-express-ts-test',
+          db_user: 'postgres',
+          db_password: 'postgres'
         }
       }
     },
@@ -82,7 +93,7 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'build',
     'Clean, lint, compile, copy and test all assets.',
-    ['clean', 'tslint', 'ts', 'copy']
+    ['clean', 'fastbuild']
   );
 
   grunt.registerTask(
@@ -99,7 +110,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask(
     'dist',
-    'Added as a good pratice, generates the distribution version.',
+    'Just generates the distribution version.',
     ['build']
   );
 };

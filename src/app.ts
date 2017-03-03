@@ -15,9 +15,12 @@ const app: express.Application = express();
 
 const storageManager: SequelizeStorageManager = new SequelizeStorageManager(
   {
-    database: process.env.DB_NAME || 'node-express-ts',
-    username: process.env.DB_USER_NAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
+    // database: process.env.DB_NAME    || 'node-express-ts',
+    // username: process.env.DB_USER     || 'postgres',
+    // password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
   });
 
 // storageManager.init(true);
