@@ -8,10 +8,6 @@ export function clearTables(done: (err?: any) => void) {
   const databaseCleaner = new DatabaseCleaner('postgresql');
   const connectionString = `postgres://${TEST_CONFIG.username}:${TEST_CONFIG.password}@${TEST_CONFIG.host}/${TEST_CONFIG.database}`;
 
-  // const connectionString = 'postgres://postgres@localhost/node-express-ts-dev'
-
-  console.log('>>>>>>>>>>>>');
-  console.log(connectionString);
   pg.connect(connectionString, function (err, client, release) {
     if (err) {
       return done(err);
