@@ -1,22 +1,22 @@
 // During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
-// let mongoose = require('mongoose');
-// let Book = require('../app/models/book');
-
-// Require the dev-dependencies
 import chai = require('chai');
 import chaiHttp = require('chai-http');
 import server = require('../index');
+
+import * as util from './util'
+
 let should = chai.should();
 
 chai.use(chaiHttp);
+
+
 // Our parent block
 describe('Users', () => {
   beforeEach((done) => { // Before each test we empty the database
-    // Book.remove({}, (err) => {
-    done();
-    // });
+    util.clearTables(done);
+    // done();
   });
   /*
     * Test the /GET route

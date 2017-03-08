@@ -7,6 +7,8 @@ export default class UserRoute {
   }
 
   public configure(router: express.Router) {
+
+    // http://localhost:3000/api/user
     router.get('/api/user',
       (req: Request, res: Response, next: NextFunction) => {
         this.storageManager.userDAO.list()

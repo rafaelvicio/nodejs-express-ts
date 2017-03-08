@@ -106,3 +106,8 @@ Set of rules used by tslint to lint your TypeScript code.
 Sequelize
 http://ngerakines.me/2016/04/11/sequelize/
 https://github.com/suksant/sequelize-typescript-examples
+
+Mocha + Chai
+https://developmentnow.com/2015/02/05/make-your-node-js-api-bulletproof-how-to-test-with-mocha-chai-and-supertest/
+
+https://magnum-ci.com/

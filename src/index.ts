@@ -76,8 +76,7 @@ function onListening(): void {
     : 'port ' + addr.port;
   console.log('Listening on ' + bind);
   console.log('-----------------------');
-  console.log(JSON.stringify(process.env));
 }
 
 // for testing
-exports = server;
+module.exports = server;

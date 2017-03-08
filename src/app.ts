@@ -4,6 +4,7 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
 import * as http from 'http';
+import * as appconfig from './config/config'
 
 // import errorHandler = require('errorhandler');
 import * as errorHandler from 'errorhandler';
@@ -15,12 +16,9 @@ const app: express.Application = express();
 
 const storageManager: SequelizeStorageManager = new SequelizeStorageManager(
   {
-    // database: process.env.DB_NAME    || 'node-express-ts',
-    // username: process.env.DB_USER     || 'postgres',
-    // password: process.env.DB_PASSWORD || 'postgres',
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    database: appconfig.getConfig().database,
+    username: appconfig.getConfig().username,
+    password: appconfig.getConfig().password
   });
 
 // storageManager.init(true);

@@ -24,35 +24,30 @@ module.exports = function (grunt) {
       },
     },
     express: {
-      options: {
-        // Override defaults here
-      },
       dev: {
         options: {
           script: 'dist/index.js',
           node_env: 'development',
-          db_name: 'node-express-ts-dev',
-          db_user: 'postgres',
-          db_password: 'postgres'
         }
       },
       prod: {
         options: {
           script: 'dist/index.js',
           node_env: 'production',
-          db_name: 'node-express-ts-prod',
-          db_user: 'postgres',
-          db_password: 'postgres'
         }
-      },
+      }
+    },
+    // Configure a mochaTest task
+    mochaTest: {
       test: {
         options: {
-          script: 'dist/index.js',
-          node_env: 'test',
-          db_name: 'node-express-ts-test',
-          db_user: 'postgres',
-          db_password: 'postgres'
-        }
+          reporter: 'spec',
+          // captureFile: 'results.txt', // Optionally capture the reporter output to a file
+          // quiet: false, // Optionally suppress output to standard out (defaults to false)
+          // clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
+          // noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
+        },
+        src: ['dist/test/**/*.js']
       }
     },
     ts: {
@@ -86,31 +81,29 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-tslint');
 
   // The build task will do a complete project build, with a previous clean
   grunt.registerTask(
     'build',
-    'Clean, lint, compile, copy and test all assets.',
-    ['clean', 'fastbuild']
+    'Clean, lint, compile, copy and test all assets.', ['clean', 'fastbuild']
   );
 
   grunt.registerTask(
     'fastbuild',
-    'Used to do a incremental and fastest build whenever a resource changes.',
-    ['tslint', 'ts', 'copy']
+    'Used to do a incremental and fastest build whenever a resource changes.', ['tslint', 'ts', 'copy', 'mochaTest']
+    // 'Used to do a incremental and fastest build whenever a resource changes.', ['tslint', 'ts', 'copy']
   );
 
   grunt.registerTask(
     'default',
-    'Makes a full build, start the server and wait for changes',
-    ['build', 'express:dev', 'watch']
+    'Makes a full build, start the server and wait for changes', ['build', 'express:dev', 'watch']
   );
 
   grunt.registerTask(
     'dist',
-    'Just generates the distribution version.',
-    ['build']
+    'Just generates the distribution version.', ['build']
   );
 };

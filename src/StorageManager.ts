@@ -33,6 +33,6 @@ export class SequelizeStorageManager {
 
   init(force?: boolean): Promise<any> {
     force = force || false;
-    return this.sequelize.sync({ force: force, logging: true });
+    return this.sequelize.sync({ force: force, logging: console.log });
   }
 }
